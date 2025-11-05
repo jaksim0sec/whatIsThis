@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      body {
+        margin: 0px;
+        width: 100vw;
+        height: 100vh;
+        padding: 0px;
+        background-color: black;
+        cursor: none;
+      }
+      #월드 {
+        background-color: white;
+        width: 90vw;
+        height: 90vh;
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        border-radius: 10px;
+        box-shadow: inset 8px 8px 5px #ffffff80, inset -8px -8px 5px #00000060;
+        padding: 13px;
+      }
+      .obj {
+        position: absolute;
+      }
+    </style>
+    <style>
+      #PLR {
+        left: 100px;
+      }
+      #ENY {
+        left: 300px;
+      }
+      .PLR {
+        width: 45px;
+        height: 45px;
+        /*background: url('https://ifh.cc/g/xmjj3l.png') no-repeat center center;*/
+        background: #250101;
+        background-size: cover;
+        bottom: 40px;
+        left: 100px;
+        animation: 젤리 0.8s ease;
+        transition: all 0.25s ease;
+        border: 3px solid #4c1e1e;
+        border-radius: 10px;
+      }
+
+      .PLR .eyeCover {
+        width: 86%;
+        height: 68%;
+        background: url('https://ifh.cc/g/z23t1p.png') no-repeat center center;
+        background-size: cover;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+      }
+      .PLR div img {
+        width: 60%;
+        height: auto;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        transition: all 0.4s ease;
+      }
+      @keyframes 눈깜빡임 {
+        0% {
+          transform: translate(-50%, 50%) scaleY(1);
+        }
+        50% {
+          transform: translate(-50%, 50%) scaleY(0.7);
+        }
+        100% {
+          transform: translate(-50%, 50%) scaleY(1);
+        }
+      }
+
+      @keyframes 젤리 {
+        0% {
+          transform: scale(1) scaleY(1) translateY(0);
+        }
+        25% {
+          transform: scale(0.9) scaleY(1.4) translateY(-7px);
+        }
+        75% {
+          transform: scale(1.1) scaleY(0.8) translateY(5px);
+        }
+        100% {
+          transform: scale(1) scaleY(1) translateY(0);
+        }
+      }
+
+      @keyframes 스몰젤리 {
+        0% {
+          transform: scale(1) scaleY(1) translateY(0);
+        }
+        25% {
+          transform: scaleX(0.98) scaleY(1.01) translateY(-0.2px);
+        }
+        75% {
+          transform: scale(1.01) scaleY(0.99) translateY(0px);
+        }
+        100% {
+          transform: scale(1) scaleY(1) translateY(0);
+        }
+      }
+    </style>
+    <style>
+      progress {
+        width: 60px;
+        height: 13px;
+        -webkit-appearance: none;
+        appearance: none;
+        opacity: 0.9;
+        transition: all 0.3s ease;
+        border: 2px solid #ff4848;
+        border-radius: 8px;
+      }
+
+      .hp::-webkit-progress-bar {
+        background-color: #841313;
+        border-radius: 8px;
+      }
+
+      .hp::-webkit-progress-value {
+        background: #ff4848;
+        border-radius: 8px;
+        transition: all 0.7s ease;
+      }
+
+      .hp::-moz-progress-bar {
+        background: linear-gradient(to right, #ff1b1b, #ff6464);
+        border-radius: 8px;
+        transition: all 0.7s ease;
+      }
+
+      .hp {
+        left: 50%;
+        top: -15px;
+        transform: translate(-50%, -50%);
+      }
+
+      .bhp {
+        border: 2px solid #5448ff;
+      }
+      .bhp::-webkit-progress-bar {
+        background: #1b1384;
+      }
+
+      .rhp::-webkit-progress-value {
+        background: #ff4848;
+      }
+      .bhp::-webkit-progress-value {
+        background: #5448ff;
+      }
+    </style>
+    <style>
+      .방패 {
+        width: 20px;
+        height: 45px;
+        border: 2px solid black;
+        border-radius: 5px;
+        left: -16px;
+        bottom: 50%;
+        transform: translate(-50%, 50%);
+        transition: all 0.5s ease;
+        background-color: white;
+        opacity : 0;
+        font-size: 17px;
+        font-weight: bold;
+      }
+
+      .검 {
+        width: 6px;
+        height: 40px;
+        border: 2px solid black;
+        border-radius: 0px 5px;
+        left: calc(50% - 30px);
+        bottom: calc(50% - 5px);
+        transform: translate(-50%, 50%) rotate(-45deg);
+        transition: all 0.5s ease, transform 0.3s ease;
+        background-color: white;
+        font-size: 6px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="월드">
+      <div
+        id="MTR"
+        class="obj"
+        style="
+          width: 5px;
+          height: 5px;
+          border: 2px solid black;
+          transform: translate(-50%, 50%);
+          z-index: 100;
+        "
+      ></div>
+      <!--플레어 캐릭터 형태-->
+
+      <div id="ENY" class="obj PLR">
+        <progress value="50" max="100" id="ENYhp" class="hp obj rhp"></progress>
+        <div id="ENYeye" class="obj eyeCover">
+          <img src="https://ifh.cc/g/PT8y86.png" id="ENYeyeG" class="obj eye" />
+        </div>
+      </div>
+
+      <div id="PLR" class="obj PLR">
+      <progress value="50" max="100" id="PLRhp" class="hp obj bhp"></progress>
+      <div id="PLReye" class="obj eyeCover">
+        <img src="https://ifh.cc/g/PT8y86.png" id="PLReyeG" class="obj eye" />
+      </div>
+      <div id="PLR방패" class="방패 obj">방패</div>
+      <div id="PLR검" class="검 obj">대충 무기</div>
+    </div>
+
+    </div>
+    <!--기본블럭-->
+    <script>
+      function HTML(name) {
+        return document.querySelector(name);
+      }
+      function 랜덤(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function 토글(문자, 글자) {
+        let 대상 = 문자;
+        if (대상.includes(글자)) {
+          while (대상.includes(글자)) {
+            대상 = 대상.replace(글자, '');
+          }
+        } else {
+          대상 += 글자;
+        }
+        return 대상;
+      }
+
+      function 터치(대상일, 대상이) {
+        const 대상1 = HTML(대상일).getBoundingClientRect();
+        const 대상2 = HTML(대상이).getBoundingClientRect();
+
+        const 대상1중심 = {
+          x: 대상1.left + 대상1.width / 2,
+          y: 대상1.top + 대상1.height / 2,
+        };
+        const 대상2중심 = {
+          x: 대상2.left + 대상2.width / 2,
+          y: 대상2.top + 대상2.height / 2,
+        };
+
+        const 거리 = {
+          x: Math.abs(대상1중심.x - 대상2중심.x),
+          y: Math.abs(대상1중심.y - 대상2중심.y),
+        };
+
+        const 허용거리 = {
+          x: (대상1.width + 대상2.width) / 2,
+          y: (대상1.height + 대상2.height) / 2,
+        };
+
+        return 거리.x <= 허용거리.x && 거리.y <= 허용거리.y;
+      }
+      function 이동(대상, dx, dy) {
+        const 요소기록 = HTML(대상);
+        const world = HTML('#월드');
+        const padding = 15;
+        const currentX = parseFloat(요소기록.style.left || 0);
+        const currentY = parseFloat(요소기록.style.bottom || 0);
+        const newX = Math.max(
+          padding,
+          Math.min(
+            world.offsetWidth - 요소기록.offsetWidth - padding,
+            currentX + dx
+          )
+        );
+        const newY = Math.max(
+          padding,
+          Math.min(
+            world.offsetHeight - 요소기록.offsetHeight - padding,
+            currentY + dy
+          )
+        );
+
+        순간이동(대상, newX, newY);
+      }
+
+      function 순간이동(대상, x, y) {
+        const 대상요소기록 = HTML(대상);
+        const 부모요소 = 대상요소기록.offsetParent || document.body;
+        const 부모너비 = 부모요소.offsetWidth;
+        const 부모높이 = 부모요소.offsetHeight;
+        const 요소기록위치 = 대상요소기록.style;
+        if (typeof x === 'string' && x.includes('%')) {
+          const percentX = parseFloat(x) / 100;
+          x = percentX * 부모너비;
+        }
+        if (typeof y === 'string' && y.includes('%')) {
+          const percentY = parseFloat(y) / 100;
+          y = percentY * 부모높이;
+        }
+        요소기록위치.left = `${x}px`;
+        요소기록위치.bottom = `${y}px`;
+      }
+
+      function 방향(대상, 목표) {
+        const 대상요소기록 = HTML(대상).getBoundingClientRect();
+        const 목표요소기록 = HTML(목표).getBoundingClientRect();
+        const 대상중심 = {
+          x: 대상요소기록.left + 대상요소기록.width / 2,
+          y: 대상요소기록.bottom + 대상요소기록.height / 2,
+        };
+        const 목표중심 = {
+          x: 목표요소기록.left + 목표요소기록.width / 2,
+          y: 목표요소기록.bottom + 목표요소기록.height / 2,
+        };
+        const dx = 목표중심.x - 대상중심.x;
+        const dy = 대상중심.y - 목표중심.y;
+        let angle = Math.atan2(dx, dy) * (180 / Math.PI);
+        return angle >= 0 ? angle : 360 + angle;
+      }
+
+      function 방향이동(대상, 각도, 크기) {
+        let 패딩 = 0;
+        const 대상요소기록 = HTML(대상);
+        const 대상위치 = 대상요소기록.getBoundingClientRect();
+        const 대상중심 = {
+          x: 대상위치.left + 대상위치.width / 2,
+          y: 대상위치.bottom,
+        };
+        const radian = 각도 * (Math.PI / 180);
+        const 이동량 = {
+          x: Math.sin(radian) * 크기,
+          y: Math.cos(radian) * 크기,
+        };
+        이동(대상, 이동량.x, 이동량.y, 패딩);
+      }
+
+      function 거리(대상1, 대상2) {
+        const 대상1위치 = HTML(대상1).getBoundingClientRect();
+        const 대상2위치 = HTML(대상2).getBoundingClientRect();
+        const 대상1중심 = {
+          x: 대상1위치.left + 대상1위치.width / 2,
+          y: 대상1위치.bottom + 대상1위치.height / 2,
+        };
+        const 대상2중심 = {
+          x: 대상2위치.left + 대상2위치.width / 2,
+          y: 대상2위치.bottom + 대상2위치.height / 2,
+        };
+        const dx = 대상2중심.x - 대상1중심.x;
+        const dy = 대상2중심.y - 대상1중심.y;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+
+      function 회전(directive, angle) {
+        const target = document.querySelector(directive);
+
+        if (!target) {
+          console.error('대상을 찾을 수 없습니다:', directive);
+          return;
+        }
+        const existingTransform = target.style.transform || '';
+        const currentRotation = existingTransform.match(
+          /rotate\((-?\d+\.?\d*)deg\)/
+        );
+        let currentAngle = currentRotation ? parseFloat(currentRotation[1]) : 0;
+        const newAngle = currentAngle + angle;
+        target.style.transform = `${existingTransform.replace(
+          /rotate\(-?\d+\.?\d*deg\)/,
+          ''
+        )} rotate(${newAngle}deg)`;
+        target.style.transformOrigin = 'center';
+      }
+    </script>
+    <!--효과관리자-->
+    <script>
+      let 효과주기 = { 눈: 2000, 젤리: 6000 };
+
+      const 눈깜빡임 = setInterval(() => {
+        document
+          .querySelectorAll('.eyeCover')
+          .forEach(
+            (eyeCover) => (eyeCover.style.animation = '눈깜빡임 0.5s ease')
+          );
+        document
+          .querySelectorAll('.eye')
+          .forEach((eye) => (eye.style.animation = '눈깜빡임 0.5s ease'));
+        document.querySelectorAll('.PLR').forEach((plr) => {
+          if (!plr.style.animation.includes('젤리'))
+            plr.style.animation = '스몰젤리 0.5s ease';
+        });
+
+        setTimeout(() => {
+          document
+            .querySelectorAll('.eyeCover')
+            .forEach((eyeCover) => (eyeCover.style.animation = 'none'));
+          document
+            .querySelectorAll('.eye')
+            .forEach((eye) => (eye.style.animation = 'none'));
+          document.querySelectorAll('.PLR').forEach((plr) => {
+            if (plr.style.animation.includes('스몰젤리'))
+              plr.style.animation = 'none';
+          });
+        }, 500);
+      }, 효과주기.눈);
+
+      const 젤리 = setInterval(() => {
+        //HTML('#PLR').style.animation = 'none';
+        //HTML('#PLR').style.animation = '젤리 1s ease';
+        //console.log('dd')
+        //setTimeout(()=>{HTML('#PLR').style.animation = '';},1000)
+      }, 효과주기.젤리);
+
+      const 눈주시 = setInterval(() => {
+        let Wp = HTML('#월드').getBoundingClientRect();
+        if (대기열.눈깜빡) {
+          대기열.눈깜빡 = false;
+          const 눈 = document.querySelectorAll('.eye');
+          눈.forEach((눈깔) => {
+            //console.log('#' + 눈깔.id.replace('G', ''));
+            let Pp = HTML(
+              '#' + 눈깔.id.replace('G', '')
+            ).getBoundingClientRect();
+            let Ep = 눈깔.getBoundingClientRect();
+            let eyeGPos = {
+              //x: Pp.left - Wp.left + (Pp.width / 2) - (Ep.width / 2),
+              //y: (Wp.height - Pp.y),
+              x: Pp.width / 2,
+              y: Pp.height / 2,
+            };
+            let 주시방향 = 방향('#' + 눈깔.id, '#MTR');
+            if (HTML('#' + 눈깔.id.replace('eyeG', '') + '검')) {
+              주시방향 = 방향(
+                '#' + 눈깔.id,
+                '#' + 눈깔.id.replace('eyeG', '') + '검'
+              );
+              //alert(눈깔.id)
+            }
+            순간이동('#' + 눈깔.id, eyeGPos.x, eyeGPos.y);
+            방향이동('#' + 눈깔.id, 주시방향, 3.5);
+          });
+          setTimeout(() => {
+            대기열.눈깜빡 = true;
+          }, 100);
+        }
+      }, 300);
+    </script>
+    <script>
+      let 대기열 = { 눈깜빡: true,공격: true, 방패:true,};
+      document.addEventListener('mousemove', function (e) {
+        let Wp = HTML('#월드').getBoundingClientRect();
+        const mouseX = e.clientX - Wp.left;
+        const mouseY = Wp.bottom - e.clientY;
+        HTML('#MTR').style.left = `${mouseX}px`;
+        HTML('#MTR').style.bottom = `${mouseY}px`;
+      });
+      document.addEventListener('mousedown', function () {
+        if(대기열.공격){
+        대기열.공격 = false;
+        let G = HTML('#PLR검');
+        const FGst = G.style.transform;
+        const FGsb = G.style.bottom;
+        const FGsl = G.style.left;
+        //if(FGst.includes('45')){console.log(';')}
+        G.style.transform = FGst.replace('315', '255');
+        G.style.transform = G.style.transform.replace('45', '105');
+        G.style.left = FGsl.replace('3', '5');
+        G.style.bottom = 'calc(50% + 5px)';
+        setTimeout(() => {
+          G.style.transform = FGst;
+          G.style.bottom = FGsb;
+          G.style.left = FGsl;
+        }, 300);
+        setTimeout(()=>{대기열.공격 = true;},1000)
+      }});
+    </script>
+    <script>
+      //let 입력인터버 = {};
+      let 입력 = [];
+      let 플레이어속도 = 10;
+      let 인터버 = null;
+      let 이동값 = { x: 0, y: 0 };
+      let 폭탄여부 = true;
+      let 아이템여부 = true;
+      //let 초기정보 = { '#PLR': { x: 0, y: 0, name: '#PLR' } };
+      function 스타일동기화() {
+        const objs = document.querySelectorAll('.obj');
+        objs.forEach((el) => {
+          const cs = window.getComputedStyle(el);
+          const l = cs.left;
+          const b = cs.bottom;
+          const t = el.transform;
+          el.style.left = l;
+          el.style.bottom = b;
+          //el.style.transform = t;
+        });
+      }
+      스타일동기화();
+      //let 인터버주기 = 1000;
+      document.addEventListener('keydown', (e) => {
+        const 키 = e.key;
+        //if(!Object.keys(입력인터버).includes(키)){입력인버터[키] = setInterval(()=>{})}
+        if (!입력.includes(키)) {
+          입력.push(키);
+        }
+        if (인터버 == null) {
+          인터버 = setInterval(() => {
+            이동값.x = 0;
+            이동값.y = 0;
+            if (
+              입력.includes('a') ||
+              입력.includes('A') ||
+              입력.includes('ArrowLeft')
+            ) {
+              이동값.x -= 플레이어속도;
+            }
+            if (
+              입력.includes('d') ||
+              입력.includes('D') ||
+              입력.includes('ArrowRight')
+            ) {
+              이동값.x += 플레이어속도;
+            }
+            if (
+              입력.includes('w') ||
+              입력.includes('W') ||
+              입력.includes('ArrowUp')
+            ) {
+              //이동값.y += 플레이어속도;
+            }
+            if (
+              입력.includes('s') ||
+              입력.includes('S') ||
+              입력.includes('ArrowDown')
+            ) {
+              //이동값.y -= 플레이어속도;
+            }
+            if (이동값.x !== 0) {
+              if (이동값.x > 0) {
+                HTML('#PLR방패').style.left = `${
+                  HTML('#PLR').getBoundingClientRect().width + 11
+                }px`;
+                HTML('#PLR검').style.left = `calc(50% + 30px)`;
+                HTML(
+                  '#PLR검'
+                ).style.transform = `translate(-50%,50%) rotate(45deg)`;
+              } else {
+                HTML('#PLR방패').style.left = `${
+                  /*-HTML('#PLR방패').getBoundingClientRect().width - 10*/ -17
+                }px`;
+                HTML('#PLR검').style.left = `calc(50% - 30px)`;
+                HTML(
+                  '#PLR검'
+                ).style.transform = `translate(-50%,50%) rotate(315deg)`;
+              }
+            }
+            이동('#PLR', 이동값.x, 이동값.y);
+            //console.log(이동값);
+          }, 50);
+        }
+      });
+      document.addEventListener('keyup', (e) => {
+        const 키 = e.key;
+        const 인덱스 = 입력.indexOf(키);
+        if (인덱스 > -1) {
+          입력.splice(인덱스, 1);
+        }
+        if(대기열.방패&(키 == 's' || 키 == 'S' || 키 == ' ')){
+          대기열.방패 = false;
+          HTML('#PLR방패').style.opacity = 1;
+          setTimeout(()=>{HTML('#PLR방패').style.opacity = 0;대기열.방패 = true;},500)
+        }
+        //console.log(인덱스)
+        if (입력.length == 0) {
+          clearInterval(인터버);
+          HTML('#PLR').style.animation = '젤리 1s ease';
+          setTimeout(() => {
+            HTML('#PLR').style.animation = 'none';
+          }, 1100);
+          인터버 = null;
+        }
+      });
+    </script>
+  </body>
+</html>

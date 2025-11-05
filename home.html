@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>니애미장례식</title>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+  <!--$gpmy-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <!--$piyhszrVDD-->
+  <style>
+    body {
+      margin: 0px;
+      width: 100vw;
+      height: 100vh;
+      padding: 0px;
+      background-color: black;
+      cursor: none;
+    }
+    #월드 {
+      width: 90vw;
+      height: 90vh;
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      border-radius: 10px;
+      padding: 13px;
+      overflow: hidden;
+      background: linear-gradient(to top, #a0dcc9, #daf3ed, #71dab9);
+      user-select: none;
+      /*background: url(https://ifh.cc/g/L16rY9.jpg);
+      background-size: cover;*/
+    }
+    #그림자 {
+      width: 90vw;
+      height: 90vh;
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      border-radius: 10px;
+      box-shadow: inset 8px 8px 10px #ffffff60, inset -8px -8px 10px #00000060;
+      pointer-events: none;
+      padding: 13px;
+    }
+  </style>
+  <!--$Frysoad-->
+  <style>
+    /*common all*/
+    .baseBoard{
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
+    }
+    #info_board{}
+
+  </style>
+</head>
+<body>
+  <div id = '월드'>
+    <div id = 'MTR' style = 'border: 1px solid black; width: 5px; height: 5px; border-radisu: 2px;'></div>
+    <div id = 'info_board' class = 'obj baseBoard'>
+
+    </div>
+  </div><!--월드 끝-->
+  <div id = '그림자'></div>
+  
+  <!--$rznrfrf!!func-->
+  <script>
+    //활용 기본 함수
+    function HTML(name) {
+      return document.querySelector(name);
+    }
+    function 랜덤(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function 토글(문자, 글자) {
+      let 대상 = 문자;
+      if (대상.includes(글자)) {
+        while (대상.includes(글자)) {
+          대상 = 대상.replace(글자, '');
+        }
+      } else {
+        대상 += 글자;
+      }
+      return 대상;
+    }
+
+    function 터치(대상일, 대상이) {
+      const 대상1 = HTML(대상일).getBoundingClientRect();
+      const 대상2 = HTML(대상이).getBoundingClientRect();
+
+      const 대상1중심 = {
+        x: 대상1.left + 대상1.width / 2,
+        y: 대상1.top + 대상1.height / 2,
+      };
+      const 대상2중심 = {
+        x: 대상2.left + 대상2.width / 2,
+        y: 대상2.top + 대상2.height / 2,
+      };
+
+      const 거리 = {
+        x: Math.abs(대상1중심.x - 대상2중심.x),
+        y: Math.abs(대상1중심.y - 대상2중심.y),
+      };
+
+      const 허용거리 = {
+        x: (대상1.width + 대상2.width) / 2,
+        y: (대상1.height + 대상2.height) / 2,
+      };
+
+      return 거리.x <= 허용거리.x && 거리.y <= 허용거리.y;
+    }
+    function 이동(대상, dx, dy) {
+      const 요소기록 = HTML(대상);
+      const world = HTML('#월드');
+      const padding = 15;
+      const currentX = parseFloat(요소기록.style.left || 0);
+      const currentY = parseFloat(요소기록.style.bottom || 0);
+      const newX = Math.max(
+        padding,
+        Math.min(
+          world.offsetWidth - 요소기록.offsetWidth - padding,
+          currentX + dx
+        )
+      );
+      const newY = Math.max(
+        padding,
+        Math.min(
+          world.offsetHeight - 요소기록.offsetHeight - padding,
+          currentY + dy
+        )
+      );
+
+      //순간이동(대상, newX, newY);
+      //console.log(Math.abs(dx),Math.abs(dy))
+      if (Math.abs(dx) !== 0) {
+        요소기록.style.left = `${newX}px`;
+      }
+      if (Math.abs(dy) !== 0) {
+        요소기록.style.bottom = `${newY}px`;
+      }
+    }
+
+    function 순간이동(대상, x, y) {
+      const 대상요소기록 = HTML(대상);
+      const 부모요소 = 대상요소기록.offsetParent || document.body;
+      const 부모너비 = 부모요소.offsetWidth;
+      const 부모높이 = 부모요소.offsetHeight;
+      const 요소기록위치 = 대상요소기록.style;
+      if (typeof x === 'string' && x.includes('%')) {
+        const percentX = parseFloat(x) / 100;
+        x = percentX * 부모너비;
+      }
+      if (typeof y === 'string' && y.includes('%')) {
+        const percentY = parseFloat(y) / 100;
+        y = percentY * 부모높이;
+      }
+      요소기록위치.left = `${x}px`;
+      요소기록위치.bottom = `${y}px`;
+    }
+
+    function 방향(대상, 목표) {
+      const 대상요소기록 = HTML(대상).getBoundingClientRect();
+      const 목표요소기록 = HTML(목표).getBoundingClientRect();
+      const 대상중심 = {
+        x: 대상요소기록.left + 대상요소기록.width / 2,
+        y: 대상요소기록.bottom + 대상요소기록.height / 2,
+      };
+      const 목표중심 = {
+        x: 목표요소기록.left + 목표요소기록.width / 2,
+        y: 목표요소기록.bottom + 목표요소기록.height / 2,
+      };
+      const dx = 목표중심.x - 대상중심.x;
+      const dy = 대상중심.y - 목표중심.y;
+      let angle = Math.atan2(dx, dy) * (180 / Math.PI);
+      return angle >= 0 ? angle : 360 + angle;
+    }
+
+    function 방향이동(대상, 각도, 크기) {
+      let 패딩 = 0;
+      const 대상요소기록 = HTML(대상);
+      const 대상위치 = 대상요소기록.getBoundingClientRect();
+      const 대상중심 = {
+        x: 대상위치.left + 대상위치.width / 2,
+        y: 대상위치.bottom,
+      };
+      const radian = 각도 * (Math.PI / 180);
+      const 이동량 = {
+        x: Math.sin(radian) * 크기,
+        y: Math.cos(radian) * 크기,
+      };
+      이동(대상, 이동량.x, 이동량.y, 패딩);
+    }
+
+    function 거리(대상1, 대상2) {
+      const 대상1위치 = HTML(대상1).getBoundingClientRect();
+      const 대상2위치 = HTML(대상2).getBoundingClientRect();
+      const 대상1중심 = {
+        x: 대상1위치.left + 대상1위치.width / 2,
+        y: 대상1위치.bottom + 대상1위치.height / 2,
+      };
+      const 대상2중심 = {
+        x: 대상2위치.left + 대상2위치.width / 2,
+        y: 대상2위치.bottom + 대상2위치.height / 2,
+      };
+      const dx = 대상2중심.x - 대상1중심.x;
+      const dy = 대상2중심.y - 대상1중심.y;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function 회전(directive, angle) {
+      const target = document.querySelector(directive);
+
+      if (!target) {
+        console.error('대상을 찾을 수 없습니다:', directive);
+        return;
+      }
+      const existingTransform = target.style.transform || '';
+      const currentRotation = existingTransform.match(
+        /rotate\((-?\d+\.?\d*)deg\)/
+      );
+      let currentAngle = currentRotation ? parseFloat(currentRotation[1]) : 0;
+      const newAngle = currentAngle + angle;
+      target.style.transform = `${existingTransform.replace(
+        /rotate\(-?\d+\.?\d*deg\)/,
+        ''
+      )} rotate(${newAngle}deg)`;
+      target.style.transformOrigin = 'center';
+    }
+
+    function 고정회전(directive, angle) {
+      const target = document.querySelector(directive);
+
+      if (!target) {
+        console.error('대상을 찾을 수 없습니다:', directive);
+        return;
+      }
+      const existingTransform = target.style.transform || '';
+      const currentRotation = existingTransform.match(
+        /rotate\((-?\d+\.?\d*)deg\)/
+      );
+      //let currentAngle = currentRotation ? parseFloat(currentRotation[1]) : 0;
+      //const newAngle = currentAngle + angle;
+      target.style.transform = `${existingTransform.replace(
+        /rotate\(-?\d+\.?\d*deg\)/,
+        ''
+      )} rotate(${angle}deg)`;
+      target.style.transformOrigin = 'center';
+    }
+
+    function 점프(대상, 힘, 보정) {
+      const 요소 = HTML(대상);
+      //HTML(대상).style.transition = HTML(대상).style.transition.replace('bottom','quotes');
+      //console.log(HTML(대상).style.transition)
+      const 최초위치 = 요소.style.bottom;
+      let 물리 = 힘;
+      const 시행 = setInterval(() => {
+        이동(대상, 0, Number(물리.toFixed(2)));
+        물리 -= 0.3;
+        if (물리 < -힘) {
+          clearInterval(시행);
+          요소.style.bottom = 최초위치;
+          if (보정) {
+            HTML(대상).style.bottom = '40px';
+          }
+        }
+      }, 20);
+    }
+  </script>
+  <!--$omqiySfzom-->
+  <script>
+    document.addEventListener('mousemove', function (e) {
+        let Wp = HTML('#월드').getBoundingClientRect();
+        const mouseX = e.clientX - Wp.left;
+        const mouseY = Wp.bottom - e.clientY;
+        HTML('#MTR').style.left = `${mouseX}px`;
+        HTML('#MTR').style.bottom = `${mouseY}px`;
+      });
+  </script>
+</body>
+</html>

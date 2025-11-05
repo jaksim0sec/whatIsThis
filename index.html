@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>무슬</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Noto+Sans+KR:wght@600&amp;display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0px;
+        width: 100vw;
+        height: 100vh;
+        padding: 0px;
+        background-color: black;
+        cursor: none;
+      }
+      #월드 {
+        width: 90vw;
+        height: 90vh;
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        border-radius: 10px;
+        padding: 13px;
+        overflow: hidden;
+        background: linear-gradient(to top, #a0dcc9, #daf3ed, #71dab9);
+        user-select: none;
+        /*background: url(https://ifh.cc/g/L16rY9.jpg);
+        background-size: cover;*/
+      }
+      .구름 {
+        width: 100px;
+        height: 50px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        animation: 구름 10s linear infinite;
+      }
+
+      @keyframes 구름 {
+        0% {
+          left: -100px;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+      #그림자 {
+        width: 90vw;
+        height: 90vh;
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        border-radius: 10px;
+        box-shadow: inset 8px 8px 10px #ffffff60, inset -8px -8px 10px #00000060;
+        pointer-events: none;
+        padding: 13px;
+      }
+      .obj {
+        position: absolute;
+      }
+    </style>
+    <style>
+      #PLR {
+        left: 20%;
+      }
+      #ENY {
+        left: 80%;
+      }
+      .PLR {
+        width: 45px;
+        height: 45px;
+        /*background: url('https://ifh.cc/g/xmjj3l.png') no-repeat center center;*/
+        background: #420000;
+        background-size: cover;
+        bottom: 40px;
+        left: 100px;
+        animation: 젤리 0.8s ease;
+        transition: left 0.2s ease, transform 0.2s ease;
+        border: 2px solid #340000;
+        border-radius: 6px 5px 6px 5px;
+        z-index: 5;
+      }
+
+      .PLR .eyeCover {
+        width: 90%;
+        height: 68%;
+        background: url('https://ifh.cc/g/z23t1p.png') no-repeat center center;
+        background-size: cover;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+      }
+      .PLR div img {
+        width: 62%;
+        height: auto;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        transition: all 0.4s ease;
+      }
+      @keyframes 눈깜빡임 {
+        0% {
+          transform: translate(-50%, 50%) scaleY(1);
+        }
+        50% {
+          transform: translate(-50%, 50%) scaleY(0.7);
+        }
+        100% {
+          transform: translate(-50%, 50%) scaleY(1);
+        }
+      }
+
+      @keyframes 젤리 {
+        0% {
+          transform: scaleX(1) scaleY(1) translateY(0);
+        }
+        25% {
+          transform: scaleX(0.9) scaleY(1.4) translateY(-7px);
+        }
+        75% {
+          transform: scaleX(1.1) scaleY(0.8) translateY(5px);
+        }
+        100% {
+          transform: scaleX(1) scaleY(1) translateY(0);
+        }
+      }
+
+      @keyframes 스몰젤리 {
+        0% {
+          transform: scale(1) scaleY(1) translateY(0);
+        }
+        25% {
+          transform: scaleX(0.98) scaleY(1.01) translateY(-0.2px);
+        }
+        75% {
+          transform: scale(1.01) scaleY(0.99) translateY(0px);
+        }
+        100% {
+          transform: scale(1) scaleY(1) translateY(0);
+        }
+      }
+    </style>
+    <style>
+      progress {
+        width: 60px;
+        height: 11px;
+        -webkit-appearance: none;
+        appearance: none;
+        opacity: 0.8;
+        transition: all 0.2s ease;
+        border: 2px solid #ff4848;
+        border-radius: 8px;
+      }
+
+      .hp::-webkit-progress-bar {
+        background-color: #841313;
+        border-radius: 8px;
+      }
+
+      .mana::-webkit-progress-bar {
+        background-color: #ffcc79;
+        border-radius: 8px;
+      }
+
+      .hp::-webkit-progress-value {
+        background: #ff4848;
+        border-radius: 8px;
+        transition: all 2s ease;
+      }
+
+      .mana::-webkit-progress-value {
+        background: #ff9d00;
+        border-radius: 8px;
+        transition: all 2s ease;
+      }
+
+      .hp {
+        left: 50%;
+        top: -20px;
+        transform: translate(-50%, -50%);
+      }
+
+      .mana {
+        left: 50%;
+        top: -9.3px;
+        transform: translate(-50%, -50%);
+        height: 6px;
+        width: 58px;
+        border: none;
+        /*border: 1.5px solid #FF9900;*/
+      }
+
+      .bhp {
+        border: 2px solid #5448ff;
+      }
+      .bhp::-webkit-progress-bar {
+        background: #1b1384;
+      }
+
+      .rhp::-webkit-progress-value {
+        background: #ff4848;
+      }
+      .bhp::-webkit-progress-value {
+        background: #5448ff;
+      }
+    </style>
+    <style>
+      #땅 {
+        width: 150%;
+        height: 100px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -2.5%;
+        /*border: 4px solid #599D75;*/
+        border-radius: 50% 15% 0% 0%;
+        /*background: linear-gradient(to top, #4ba47c, #47b272, #83c88b);*/
+        background: linear-gradient(to top, #323232, #575757, #818181);
+      }
+      .방패 {
+        width: 30px;
+        height: 40px;
+        border: 2px solid #a87c53;
+        border-radius: 5px;
+        left: -16px;
+        bottom: 50%;
+        transform: translate(-50%, 50%);
+        transition: all 0.3s ease;
+        background-color: #bb8d60;
+        opacity: 0;
+        font-size: 17px;
+        font-weight: bold;
+      }
+
+      .검 {
+        width: 6px;
+        height: 65px;
+        border: 2px solid #762d10;
+        border-radius: 3px 20px 3px 3px;
+        left: calc(50% - 30px);
+        bottom: calc(50% - 0px);
+        transform: translate(-50%, 50%) rotate(-45deg);
+        transition: all 0.5s ease, transform 0.4s ease;
+        background-color: #8b3716;
+        font-size: 6px;
+        font-weight: bold;
+      }
+
+      #ENY검 {
+        transform: translate(-50%, 50%) rotate(-45deg) scaleX(-1);
+      }
+      #PLR검 {
+        left: calc(50% + 30px);
+        transform: translate(-50%, 50%) rotate(45deg);
+      }
+      #PLR방패 {
+        left: 62px;
+      }
+    </style>
+    <style>
+      .불꽃 {
+        width: 10px;
+        height: 10px;
+        background-color: #ffca8c;
+        animation: 불꽃 1s ease forwards;
+        position: absolute;
+        z-index: 0;
+        border-radius: 2.5px;
+      }
+
+      @keyframes 불꽃 {
+        0% {
+          transform: scale(1) rotate(0deg);
+        }
+        100% {
+          transform: scale(0) rotate(90deg);
+        }
+      }
+
+      .딜량 {
+        animation: 딜량 0.8s linear forwards;
+        position: absolute;
+        z-index: 10;
+        font-size: 20px;
+        font-weight:bold;
+        color: white;
+        font-family: 'Noto Sans KR', serif;
+        font-family: 'Do Hyeon', serif;
+        /*-webkit-text-stroke: 0.5px black;*/
+      }
+
+      @keyframes 딜량 {
+        0% {
+          opacity: 1;
+        }
+        50%{
+          transform: translateY(-5px);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-10px);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="월드">
+      <div
+        id="MTR"
+        class="obj"
+        style="
+          width: 5px;
+          height: 5px;
+          border: 2px solid black;
+          transform: translate(-50%, 50%);
+          z-index: 100;
+        "
+      ></div>
+      <!--플레어 캐릭터 형태-->
+      <div id="땅"></div>
+      <div id="ENY" class="obj PLR">
+        <progress value="50" max="100" id="ENYhp" class="hp obj rhp"></progress>
+        <progress value="50" max="100" id="ENYmana" class="obj mana"></progress>
+        <div id="ENYeye" class="obj eyeCover">
+          <img src="https://ifh.cc/g/PT8y86.png" id="ENYeyeG" class="obj eye" />
+        </div>
+        <div id="ENY방패" class="방패 obj"></div>
+        <div id="ENY검" class="검 obj"></div>
+      </div>
+
+      <div id="PLR" class="obj PLR">
+        <progress value="0" max="100" id="PLRhp" class="hp obj bhp"></progress>
+        <progress value="0" max="100" id="PLRmana" class="obj mana"></progress>
+        <div id="PLReye" class="obj eyeCover">
+          <img src="https://ifh.cc/g/PT8y86.png" id="PLReyeG" class="obj eye" />
+        </div>
+        <div id="PLR방패" class="방패 obj"></div>
+        <div id="PLR검" class="검 obj"></div>
+      </div>
+    </div>
+    <div id="그림자"></div>
+    <!--기본블럭-->
+    <script>
+      function HTML(name) {
+        return document.querySelector(name);
+      }
+      function 랜덤(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function 토글(문자, 글자) {
+        let 대상 = 문자;
+        if (대상.includes(글자)) {
+          while (대상.includes(글자)) {
+            대상 = 대상.replace(글자, '');
+          }
+        } else {
+          대상 += 글자;
+        }
+        return 대상;
+      }
+
+      function 터치(대상일, 대상이) {
+        const 대상1 = HTML(대상일).getBoundingClientRect();
+        const 대상2 = HTML(대상이).getBoundingClientRect();
+
+        const 대상1중심 = {
+          x: 대상1.left + 대상1.width / 2,
+          y: 대상1.top + 대상1.height / 2,
+        };
+        const 대상2중심 = {
+          x: 대상2.left + 대상2.width / 2,
+          y: 대상2.top + 대상2.height / 2,
+        };
+
+        const 거리 = {
+          x: Math.abs(대상1중심.x - 대상2중심.x),
+          y: Math.abs(대상1중심.y - 대상2중심.y),
+        };
+
+        const 허용거리 = {
+          x: (대상1.width + 대상2.width) / 2,
+          y: (대상1.height + 대상2.height) / 2,
+        };
+
+        return 거리.x <= 허용거리.x && 거리.y <= 허용거리.y;
+      }
+      function 이동(대상, dx, dy) {
+        const 요소기록 = HTML(대상);
+        const world = HTML('#월드');
+        const padding = 15;
+        const currentX = parseFloat(요소기록.style.left || 0);
+        const currentY = parseFloat(요소기록.style.bottom || 0);
+        const newX = Math.max(
+          padding,
+          Math.min(
+            world.offsetWidth - 요소기록.offsetWidth - padding,
+            currentX + dx
+          )
+        );
+        const newY = Math.max(
+          padding,
+          Math.min(
+            world.offsetHeight - 요소기록.offsetHeight - padding,
+            currentY + dy
+          )
+        );
+
+        //순간이동(대상, newX, newY);
+        //console.log(Math.abs(dx),Math.abs(dy))
+        if (Math.abs(dx) !== 0) {
+          요소기록.style.left = `${newX}px`;
+        }
+        if (Math.abs(dy) !== 0) {
+          요소기록.style.bottom = `${newY}px`;
+        }
+      }
+
+      function 순간이동(대상, x, y) {
+        const 대상요소기록 = HTML(대상);
+        const 부모요소 = 대상요소기록.offsetParent || document.body;
+        const 부모너비 = 부모요소.offsetWidth;
+        const 부모높이 = 부모요소.offsetHeight;
+        const 요소기록위치 = 대상요소기록.style;
+        if (typeof x === 'string' && x.includes('%')) {
+          const percentX = parseFloat(x) / 100;
+          x = percentX * 부모너비;
+        }
+        if (typeof y === 'string' && y.includes('%')) {
+          const percentY = parseFloat(y) / 100;
+          y = percentY * 부모높이;
+        }
+        요소기록위치.left = `${x}px`;
+        요소기록위치.bottom = `${y}px`;
+      }
+
+      function 방향(대상, 목표) {
+        const 대상요소기록 = HTML(대상).getBoundingClientRect();
+        const 목표요소기록 = HTML(목표).getBoundingClientRect();
+        const 대상중심 = {
+          x: 대상요소기록.left + 대상요소기록.width / 2,
+          y: 대상요소기록.bottom + 대상요소기록.height / 2,
+        };
+        const 목표중심 = {
+          x: 목표요소기록.left + 목표요소기록.width / 2,
+          y: 목표요소기록.bottom + 목표요소기록.height / 2,
+        };
+        const dx = 목표중심.x - 대상중심.x;
+        const dy = 대상중심.y - 목표중심.y;
+        let angle = Math.atan2(dx, dy) * (180 / Math.PI);
+        return angle >= 0 ? angle : 360 + angle;
+      }
+
+      function 방향이동(대상, 각도, 크기) {
+        let 패딩 = 0;
+        const 대상요소기록 = HTML(대상);
+        const 대상위치 = 대상요소기록.getBoundingClientRect();
+        const 대상중심 = {
+          x: 대상위치.left + 대상위치.width / 2,
+          y: 대상위치.bottom,
+        };
+        const radian = 각도 * (Math.PI / 180);
+        const 이동량 = {
+          x: Math.sin(radian) * 크기,
+          y: Math.cos(radian) * 크기,
+        };
+        이동(대상, 이동량.x, 이동량.y, 패딩);
+      }
+
+      function 거리(대상1, 대상2) {
+        const 대상1위치 = HTML(대상1).getBoundingClientRect();
+        const 대상2위치 = HTML(대상2).getBoundingClientRect();
+        const 대상1중심 = {
+          x: 대상1위치.left + 대상1위치.width / 2,
+          y: 대상1위치.bottom + 대상1위치.height / 2,
+        };
+        const 대상2중심 = {
+          x: 대상2위치.left + 대상2위치.width / 2,
+          y: 대상2위치.bottom + 대상2위치.height / 2,
+        };
+        const dx = 대상2중심.x - 대상1중심.x;
+        const dy = 대상2중심.y - 대상1중심.y;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+
+      function 회전(directive, angle) {
+        const target = document.querySelector(directive);
+
+        if (!target) {
+          console.error('대상을 찾을 수 없습니다:', directive);
+          return;
+        }
+        const existingTransform = target.style.transform || '';
+        const currentRotation = existingTransform.match(
+          /rotate\((-?\d+\.?\d*)deg\)/
+        );
+        let currentAngle = currentRotation ? parseFloat(currentRotation[1]) : 0;
+        const newAngle = currentAngle + angle;
+        target.style.transform = `${existingTransform.replace(
+          /rotate\(-?\d+\.?\d*deg\)/,
+          ''
+        )} rotate(${newAngle}deg)`;
+        target.style.transformOrigin = 'center';
+      }
+
+      function 고정회전(directive, angle) {
+        const target = document.querySelector(directive);
+
+        if (!target) {
+          console.error('대상을 찾을 수 없습니다:', directive);
+          return;
+        }
+        const existingTransform = target.style.transform || '';
+        const currentRotation = existingTransform.match(
+          /rotate\((-?\d+\.?\d*)deg\)/
+        );
+        //let currentAngle = currentRotation ? parseFloat(currentRotation[1]) : 0;
+        //const newAngle = currentAngle + angle;
+        target.style.transform = `${existingTransform.replace(
+          /rotate\(-?\d+\.?\d*deg\)/,
+          ''
+        )} rotate(${angle}deg)`;
+        target.style.transformOrigin = 'center';
+      }
+
+      function 점프(대상, 힘, 보정) {
+        const 요소 = HTML(대상);
+        //HTML(대상).style.transition = HTML(대상).style.transition.replace('bottom','quotes');
+        //console.log(HTML(대상).style.transition)
+        const 최초위치 = 요소.style.bottom;
+        let 물리 = 힘;
+        const 시행 = setInterval(() => {
+          이동(대상, 0, Number(물리.toFixed(2)));
+          물리 -= 0.3;
+          if (물리 < -힘) {
+            clearInterval(시행);
+            요소.style.bottom = 최초위치;
+            if (보정) {
+              HTML(대상).style.bottom = '40px';
+            }
+          }
+        }, 20);
+      }
+
+      function 불꽃(위치) {
+        setTimeout(() => {
+          불꽃카운터++;
+          const 임시카운터 = 불꽃카운터;
+          const 불꽃 = document.createElement('div');
+          불꽃.className = '불꽃';
+          불꽃.id = `불꽃${불꽃카운터}`;
+          불꽃.style.left = `${위치.x}px`;
+          불꽃.style.bottom = `${위치.y}px`;
+          const 랜덤색상 =
+            랜덤(1, 2) == 1 ? '#FF5A47' : 랜덤(1, 2) ? '#FF662A' : '#FF8E61';
+          불꽃.style.border = '2px solid '+랜덤색상;
+
+          const 월드 = document.getElementById('월드');
+          월드.appendChild(불꽃);
+
+          setTimeout(() => {
+            const 불꽃요소 = HTML(`#불꽃${임시카운터}`);
+            if (불꽃요소) {
+              불꽃요소.style.opacity = 0;
+              불꽃요소.remove();
+            }
+          }, 1000);
+        }, 150);
+      }
+
+      function 딜량(크기,위치,기본값) {
+        setTimeout(() => {
+          딜량카운터++;
+          const 임시카운터 = 딜량카운터;
+          const 딜량 = document.createElement('div');
+          딜량.className = '딜량';
+          딜량.id = `딜량${불꽃카운터}`;
+          딜량.innerHTML = 크기;
+          if(크기>기본값){딜량.style.color = '#FF662A'}
+          딜량.style.left = `${위치.x}px`;
+          딜량.style.bottom = `${위치.y}px`;
+          //const 랜덤색상 =
+          //  랜덤(1, 2) == 1 ? '#FF5A47' : 랜덤(1, 2) ? '#FF662A' : '#FF8E61';
+          //불꽃.style.border = '1px solid '+랜덤색상;
+
+          const 월드 = document.getElementById('월드');
+          월드.appendChild(딜량);
+
+          setTimeout(() => {
+            const 딜량요소 = HTML(`#딜량${임시카운터}`);
+            if (딜량요소) {
+              딜량요소.style.opacity = 0;
+              딜량요소.remove();
+            }
+          }, 1000);
+        }, 150);
+      }
+
+      let 불꽃카운터 = 0;
+      let 딜량카운터 = 0;
+    </script>
+    <!--봇관리-->
+    <script>
+      let 봇대기열 = { 공격: true, 점프: true, 방패: true };
+      function 봇공격() {
+        if (봇대기열.공격) {
+          봇대기열.공격 = false;
+          let G = HTML('#ENY검');
+          const FGst = G.style.transform;
+          const FGsb = G.style.bottom;
+          const FGsl = G.style.left;
+          //if(FGst.includes('45')){console.log(';')}
+          G.style.transform = FGst.replace('315', '255');
+          G.style.transform = G.style.transform.replace('45', '105');
+          G.style.left = FGsl.replace('3', '5');
+          G.style.bottom = 'calc(50% + 5px)';
+          const 감지 = setInterval(() => {
+            if (
+              터치('#ENY검', '#PLR') &&
+              !(
+                터치('#ENY검', '#PLR방패') &&
+                HTML('#PLR방패').style.opacity == '1'
+              )
+            ) {
+              const 최종공격 = 정보.적.공격력 * (랜덤(1,100)<정보.적.크댐확?정보.적.크댐:1);
+              정보.나.체력 -= 최종공격;
+              딜량(최종공격,{
+                x: parseInt(HTML('#PLR').style.left),
+                y: parseInt(HTML('#PLR').style.bottom),
+              },정보.적.공격력)
+              체력표기();
+              HTML('#PLReyeG').style.width = '55%';
+              setTimeout(()=>{HTML('#PLReyeG').style.width = '62%';},700)
+              clearInterval(감지);
+            }
+          }, 50);
+          setTimeout(() => {
+            G.style.transform = FGst;
+            G.style.bottom = FGsb;
+            G.style.left = FGsl;
+          }, 300);
+          setTimeout(() => {
+            clearInterval(감지);
+            봇대기열.공격 = true;
+          }, 700);
+        }
+      }
+      function 템정렬(대상, x, y, 대기열) {
+        if (x !== 0 && 대기열) {
+          if (x > 0) {
+            HTML(대상 + '방패').style.left = `${
+              HTML(대상).getBoundingClientRect().width + 11
+            }px`;
+            HTML(대상 + '검').style.left = `calc(50% + 30px)`;
+            HTML(
+              대상 + '검'
+            ).style.transform = `translate(-50%,50%) rotate(45deg)${대상 == '#ENY'?' scaleX(-1)':''}`;
+          } else {
+            HTML(대상 + '방패').style.left = `${
+              /*-HTML('#PLR방패').getBoundingClientRect().width - 10*/ -17
+            }px`;
+            HTML(대상 + '검').style.left = `calc(50% - 30px)`;
+            HTML(
+              대상 + '검'
+            ).style.transform = `translate(-50%,50%) rotate(315deg)`;
+          }
+        }
+      }
+
+      function 봇이동(x) {
+        //console.log(x);
+        템정렬('#ENY', x, 0, 봇대기열.공격);
+        이동('#ENY', x, 0);
+      }
+      let 봇 = null;
+      let 봇상태 = ['<'];
+      let 봇이동값 = { x: 0, y: 0 };
+      setTimeout(()=>{
+        봇 = setInterval(() => {
+        //봇
+        if (랜덤(1, 50) == 1) {
+          console.log(랜덤(1, 50));
+          봇상태[0] = 랜덤(1, 3) == 1 ? '<' : 랜덤(1, 2) ? '>' : '멈춤';
+        }
+        //while(의지 == 봇상태[0] && 의지 !== null){의지 = await 랜덤(1,3)==1?'따라':랜덤(1,2)?'거꾸로':'멈춤';}
+        봇이동값 = { x: 0, y: 0 };
+        //console.log(의지);
+        if (봇상태[0] == '>') {
+          봇이동값.x += 정보.적.속도; //console.log(봇이동값.x)
+        }
+        if (봇상태[0] == '<') {
+          봇이동값.x -= 정보.적.속도;
+        }
+        if (봇상태[0] == '멈춤') {
+          봇이동값.x = 0;
+        }
+        //alert(HTML('#ENY').style.left , HTML('#PLR').style.left)
+        if (랜덤(1, 5) < 4) {
+          if (
+            parseInt(HTML('#ENY').style.left) >
+            parseInt(HTML('#PLR').style.left)
+          ) {
+            봇상태[0] = '<';
+          } else {
+            봇상태[0] = '>';
+          }
+          if (랜덤(1, 6) < 2) {
+            if (정보.적.속도 == 정보.적.기준속도 && 정보.적.마나 > 0 && 봇이동값.x !== 0) {
+              정보.적.속도 *= 정보.적.가속;
+              const 불꽃생성 = setInterval(() => {
+                불꽃({
+                  x: parseInt(HTML('#ENY').style.left) + 20,
+                  y: parseInt(HTML('#ENY').style.bottom) + 랜덤(0,5),
+                });
+              }, 40);
+              정보.적.마나 -= 5;
+              체력표기();
+              setTimeout(() => {
+                정보.적.속도 = 정보.적.기준속도;
+              }, 100);
+              setTimeout(() => {
+                봇공격();
+              }, 150);
+              setTimeout(() => {
+                clearInterval(불꽃생성);
+              }, 100);
+            }
+          }
+        }
+        if(거리('#ENY', '#PLR') < 100){setTimeout(()=>{봇공격()},랜덤(0,100));};
+        if (거리('#ENY', '#PLR') < 200 && 봇대기열.점프 && 랜덤(1, 10) == 1) {
+          봇대기열.점프 = false;
+          점프('#ENY', 10, true);
+          HTML('#ENY').style.animation = '젤리 1s ease';
+            setTimeout(() => {
+              HTML('#ENY').style.animation = 'none';
+            }, 1100);
+          if (/*랜덤(1, 2) == 1*/ true) {
+            if (
+              parseInt(HTML('#ENY').style.left) >
+              parseInt(HTML('#PLR').style.left)
+            ) {
+              //alert('<')
+              봇상태[0] = '<';
+              setTimeout(() => {
+                봇상태[0] = '>';
+              }, 랜덤(300, 500));
+            } else {
+              봇상태[0] = '>';
+              setTimeout(() => {
+                봇상태[0] = '<';
+              }, 랜덤(300, 500));
+              //alert('>')
+            }
+            setTimeout(() => {
+              봇공격();
+            }, 랜덤(10, 200));
+          }
+          if (봇대기열.방패) {
+            봇대기열.방패 = false;
+            HTML('#ENY방패').style.opacity = 1;
+            setTimeout(() => {
+              HTML('#ENY방패').style.opacity = 0;
+              봇대기열.방패 = true;
+            }, 1000);
+          }
+          setTimeout(() => {
+            봇대기열.점프 = true;
+          }, 1600);
+        }
+        봇이동(봇이동값.x);
+      }, 100);},100);
+    </script>
+    <!--효과관리자-->
+    <script>
+      HTML('#PLR검').style.transform = 'translate(-50%, 50%) rotate(45deg)';
+      HTML('#ENY검').style.transform = 'translate(-50%, 50%) rotate(-45deg) scaleX(-1)';
+      let 효과주기 = { 눈: 2000, 젤리: 6000 };
+      function 공격() {
+        if (대기열.공격) {
+          대기열.공격 = false;
+          let G = HTML('#PLR검');
+          const FGst = G.style.transform;
+          const FGsb = G.style.bottom;
+          const FGsl = G.style.left;
+          //if(FGst.includes('45')){console.log(';')}
+          G.style.transform = FGst.replace('315', '255');
+          G.style.transform = G.style.transform.replace('45', '105');
+          G.style.left = FGsl.replace('3', '5');
+          G.style.bottom = 'calc(50% + 5px)';
+          const 감지 = setInterval(() => {
+            if (
+              터치('#PLR검', '#ENY') &&
+              !(
+                터치('#PLR검', '#ENY방패') &&
+                HTML('#ENY방패').style.opacity == '1'
+              )
+            ) {
+              const 최종공격 = 정보.나.공격력 * (랜덤(1,100)<정보.나.크댐확?정보.나.크댐:1);
+              정보.적.체력 -= 최종공격;
+              딜량(최종공격,{
+                x: parseInt(HTML('#ENY').style.left),
+                y: parseInt(HTML('#ENY').style.bottom),
+              },정보.나.공격력)
+              HTML('#ENYeyeG').style.width = '55%';
+              setTimeout(()=>{HTML('#ENYeyeG').style.width = '62%';},700)
+              체력표기();
+              clearInterval(감지);
+            }
+          }, 50);
+          setTimeout(() => {
+            G.style.transform = FGst;
+            G.style.bottom = FGsb;
+            G.style.left = FGsl;
+          }, 300);
+          setTimeout(() => {
+            clearInterval(감지);
+            대기열.공격 = true;
+          }, 700);
+        }
+      }
+      const 눈깜빡임 = setInterval(() => {
+        document
+          .querySelectorAll('.eyeCover')
+          .forEach(
+            (eyeCover) => (eyeCover.style.animation = '눈깜빡임 0.5s ease')
+          );
+        document
+          .querySelectorAll('.eye')
+          .forEach((eye) => (eye.style.animation = '눈깜빡임 0.5s ease'));
+        document.querySelectorAll('.PLR').forEach((plr) => {
+          if (!plr.style.animation.includes('젤리'))
+            plr.style.animation = '스몰젤리 0.5s ease';
+        });
+
+        setTimeout(() => {
+          document
+            .querySelectorAll('.eyeCover')
+            .forEach((eyeCover) => (eyeCover.style.animation = 'none'));
+          document
+            .querySelectorAll('.eye')
+            .forEach((eye) => (eye.style.animation = 'none'));
+          document.querySelectorAll('.PLR').forEach((plr) => {
+            if (plr.style.animation.includes('스몰젤리'))
+              plr.style.animation = 'none';
+          });
+        }, 500);
+      }, 효과주기.눈);
+
+      const 젤리 = setInterval(() => {
+        //HTML('#PLR').style.animation = 'none';
+        //HTML('#PLR').style.animation = '젤리 1s ease';
+        //console.log('dd')
+        //setTimeout(()=>{HTML('#PLR').style.animation = '';},700)
+      }, 효과주기.젤리);
+
+      const 눈주시 = setInterval(() => {
+        let Wp = HTML('#월드').getBoundingClientRect();
+        if (대기열.눈깜빡) {
+          대기열.눈깜빡 = false;
+          const 눈 = document.querySelectorAll('.eye');
+          눈.forEach((눈깔) => {
+            //console.log('#' + 눈깔.id.replace('G', ''));
+            let Pp = HTML(
+              '#' + 눈깔.id.replace('G', '')
+            ).getBoundingClientRect();
+            let Ep = 눈깔.getBoundingClientRect();
+            let eyeGPos = {
+              //x: Pp.left - Wp.left + (Pp.width / 2) - (Ep.width / 2),
+              //y: (Wp.height - Pp.y),
+              x: Pp.width / 2,
+              y: Pp.height / 2,
+            };
+            let 주시방향 = 방향('#' + 눈깔.id, '#MTR');
+            if (HTML('#' + 눈깔.id.replace('eyeG', '') + '검')) {
+              주시방향 = 방향(
+                '#' + 눈깔.id,
+                '#' + 눈깔.id.replace('eyeG', '') + '검'
+              );
+              //alert(눈깔.id)
+            }
+            순간이동('#' + 눈깔.id, eyeGPos.x, eyeGPos.y);
+            방향이동('#' + 눈깔.id, 주시방향, 3.5);
+          });
+          setTimeout(() => {
+            대기열.눈깜빡 = true;
+          }, 100);
+        }
+      }, 300);
+    </script>
+    <script>
+      let 정보 = {
+        나: { 공격력: 10, 체력: 100, 마나: 100 , 크댐확 : 5, 크댐: 7 , 속도: 30, 기준속도 : 30, 가속:5.5},
+        적: { 체력: 100, 공격력: 10, 마나: 100, 속도: 30, 크댐확 : 5, 크댐: 7 , 기준속도 : 30, 가속:5.5},
+      };
+      체력표기();
+      let 대기열 = { 눈깜빡: true, 공격: true, 방패: true, 점프: true };
+      document.addEventListener('mousemove', function (e) {
+        let Wp = HTML('#월드').getBoundingClientRect();
+        const mouseX = e.clientX - Wp.left;
+        const mouseY = Wp.bottom - e.clientY;
+        HTML('#MTR').style.left = `${mouseX}px`;
+        HTML('#MTR').style.bottom = `${mouseY}px`;
+      });
+      function 체력표기() {
+        HTML('#ENYhp').value = 정보.적.체력;
+        HTML('#PLRhp').value = 정보.나.체력;
+        HTML('#ENYmana').value = 정보.적.마나;
+        HTML('#PLRmana').value = 정보.나.마나;
+        if (정보.적.체력 <= 0) {
+          clearInterval(봇);
+          setTimeout(()=>{win(false)},2000)
+          setTimeout(()=>{
+          HTML('#ENYeyeG').style.opacity = 0;
+          고정회전('#ENY검',270);
+          HTML('#ENY검').style.bottom = '-20px';
+        },500)
+        }
+        if (정보.나.체력 <= 0) {
+          setTimeout(()=>{win(true);clearInterval(눈깜빡임);},2000)
+          clearInterval(봇);
+          setTimeout(()=>{
+          HTML('#PLReyeG').style.opacity = 0;
+          고정회전('#PLR검',270);
+          HTML('#PLR검').style.bottom = '-20px';
+        },500)
+        }
+        
+      }
+      document.addEventListener('mousedown', function () {
+        공격();
+      });
+    </script>
+    <script>
+      //let 입력인터버 = {};
+      let 입력 = [];
+      //let 정보.나.속도 = 10;
+      let 인터버 = null;
+      let 이동값 = { x: 0, y: 0 };
+      //let 폭탄여부 = true;
+      //let 아이템여부 = true;
+      //let 초기정보 = { '#PLR': { x: 0, y: 0, name: '#PLR' } };
+      function 스타일동기화() {
+        const objs = document.querySelectorAll('.obj');
+        objs.forEach((el) => {
+          const cs = window.getComputedStyle(el);
+          const l = cs.left;
+          const b = cs.bottom;
+          const t = el.transform;
+          el.style.left = l;
+          el.style.bottom = b;
+          //el.style.transform = t;
+        });
+      }
+      스타일동기화();
+      //let 인터버주기 = 1000;
+      document.addEventListener('keydown', async function (e) {
+        const 키 = e.key;
+        //if(!Object.keys(입력인터버).includes(키)){입력인버터[키] = setInterval(()=>{})}
+        if (!입력.includes(키)) {
+          입력.push(키);
+        }
+        if (인터버 == null && 정보.나.체력 > 0 && 정보.적.체력 > 0) {
+          인터버 = setInterval(async function () {
+            if (!(정보.나.체력 > 0 && 정보.적.체력 > 0)) {
+              clearInterval(인터버);
+            }
+            이동값.x = 0;
+            이동값.y = 0;
+            if (
+              입력.includes('a') ||
+              입력.includes('A') ||
+              입력.includes('ArrowLeft')
+            ) {
+              이동값.x -= 정보.나.속도;
+            }
+            if (
+              입력.includes('d') ||
+              입력.includes('D') ||
+              입력.includes('ArrowRight')
+            ) {
+              이동값.x += 정보.나.속도;
+            }
+            if (입력.includes(' ')) {
+              공격();
+            }
+            if (입력.includes('s') || 입력.includes('S') || 입력.includes('Enter')) {
+              if (정보.나.속도 == 정보.나.기준속도 && 정보.나.마나 > 0 && 이동값.x !== 0) {
+                //const 초기속도 = 정보.나.속도
+                정보.나.속도 *= 정보.나.가속;
+                const 불꽃생성 = setInterval(() => {
+                  불꽃({
+                    x: parseInt(HTML('#PLR').style.left) + 20,
+                    y: parseInt(HTML('#PLR').style.bottom) + 랜덤(0,5),
+                  });
+                }, 40);
+                정보.나.마나 -= 2.5;
+                체력표기();
+                setTimeout(() => {
+                  정보.나.속도 = 정보.나.기준속도;
+                }, 100);
+                setTimeout(() => {
+                  clearInterval(불꽃생성);
+                }, 100);
+              }
+            }
+            if (
+              입력.includes('w') ||
+              입력.includes('W') ||
+              입력.includes('ArrowUp')
+            ) {
+              if (대기열.점프) {
+                대기열.점프 = false;
+                점프('#PLR', 10, true);
+                /*if( 랜덤(1,4) == 1){
+                  setTimeout(function(){
+                  점프('#ENY', 10, true);
+                },랜덤(100,500))}*/
+                HTML('#PLR').style.animation = '젤리 1s ease';
+                //대기열.점프 =  true
+                setTimeout(() => {
+                  대기열.점프 = true;
+                  HTML('#PLR').style.animation = 'none';
+                }, 1500);
+              }
+            }
+            if (
+              (입력.includes('q') ||
+              입력.includes('Q') ||
+              입력.includes('ArrowDown'))&&대기열.방패 
+            ) {
+              대기열.방패 = false;
+              console.log(대기열.방패)
+              HTML('#PLR방패').style.opacity = 1;
+              setTimeout(()=>{HTML('#PLR방패').style.opacity = 0;},1000)
+              setTimeout(() => {
+                대기열.방패 = true;
+              }, 2000);
+            }
+            템정렬('#PLR', 이동값.x, 이동값.y, 대기열.공격);
+            이동('#PLR', 이동값.x, 이동값.y);
+            //console.log(이동값);
+          }, 50);
+        }
+      });
+      document.addEventListener('keyup', (e) => {
+        const 키 = e.key;
+        const 인덱스 = 입력.indexOf(키);
+        if (인덱스 > -1) {
+          입력.splice(인덱스, 1);
+        }
+        //console.log(인덱스)
+        if (입력.length == 0) {
+          clearInterval(인터버);
+          if (!HTML('#PLR').style.animation.includes('젤리')) {
+            HTML('#PLR').style.animation = '젤리 1s ease';
+            setTimeout(() => {
+              HTML('#PLR').style.animation = 'none';
+            }, 1100);
+          }
+          인터버 = null;
+        }
+      });
+
+      let isWin = false;
+      function win(type){
+        if(isWin)return
+        const div = document.createElement('div');
+        div.innerHTML=`
+        <style>
+        @keyframes biggerShow {
+          0% {
+            transform: scale(0.5);
+          }
+          50% {
+            transform: scale(1.1) rotate(25deg);
+          }
+          100% {
+            transform: scale(1) rotate(22deg);
+          }
+        }  
+        @keyframes killBack{
+          0%{backdrop-filter:blur(0px)}
+          100%{backdrop-filter:blur(4px);background:#00000010}
+        }
+        </style>
+        <div style = "font-family: 'Do Hyeon', serif;width:100vw;letter-spacing:1rem;height:100vh;position:fixed;z-index:9999;display:flex;justify-content:center;align-items:center;animation:killBack 0.5s ease 1s forwards">
+          <div style = "animation:biggerShow 0.5s ease;height: 30vh;width:400vw;display:flex;justify-content:center;align-items:center;outline:5vh;transform:rotate(22deg);background:${type?'red':'blue'};font-size:5em;color:white;font-weight:700;padding:5% 0;flex-shrink:0">
+            <div style = "width:100%;height:100%;background:#ffffff50;display:flex;justify-content:center;align-items:center;">
+            ${type?'패배':'승리'}
+            <div>
+          </div>
+        </div>
+        `
+        HTML('body').append(div)
+      }
+    </script>
+  </body>
+</html>
