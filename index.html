@@ -780,7 +780,7 @@
           }, 1600);
         }
         봇이동(봇이동값.x);
-      }, 100);},100);
+      }, 100);},3000);
     </script>
     <!--효과관리자-->
     <script>
@@ -1076,6 +1076,7 @@
       let isWin = false;
       function win(type){
         if(isWin)return
+        isWin = true;
         const div = document.createElement('div');
         div.innerHTML=`
         <style>
